@@ -6,7 +6,7 @@
 - matplotlib
 - pylab
 
-An easy way to get all the prerequisites is to use Anaconda as your python interpreter, found[here](https://www.anaconda.com/download/).
+An easy way to get all the prerequisites is to use Anaconda as your python interpreter, found [here](https://www.anaconda.com/download/).
 
 ---------------------------------
 
