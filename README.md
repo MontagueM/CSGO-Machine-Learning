@@ -1,6 +1,6 @@
 ## Machine Learning Naive-Bayes algorithm that learns between the KD of s1mple and Zeus (from the CSGO team Na'Vi).
 
-####Prerequisites:
+#### Prerequisites:
 - numpy
 - sklearn
 - matplotlib
@@ -10,7 +10,7 @@ An easy way to get all the prerequisites is to use Anaconda as your python inter
 
 ---------------------------------
 
-####Style for text.txt:
+#### Style for text.txt:
 
 kills deaths player
 
