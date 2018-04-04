@@ -7,8 +7,12 @@ import numpy as np
 legend = 0
 
 
-def picture(clf, x_test, y_test, int_progressive, xaxis_min, xaxis_max, yaxis_min, yaxis_max):
+def picture(clf, x_test, y_test, int_progressive, xaxis_min, xaxis_max, yaxis_min, yaxis_max, should_add_prediction,
+            predict_kills, predict_deaths):
     global legend
+
+    image_name = "images/img" + str(int_progressive) + ".png"
+
     x_min = xaxis_min-5
     x_max = int(xaxis_max+(xaxis_max/7.5))
     y_min = yaxis_min-5
@@ -36,10 +40,13 @@ def picture(clf, x_test, y_test, int_progressive, xaxis_min, xaxis_max, yaxis_mi
     plt.scatter(deaths_zeus, kills_zeus, color="orange", label="zeus")
     plt.scatter(xaxis_min-5, yaxis_min-5, color="blue", label="s1mple surface")
     plt.scatter(xaxis_min-5, yaxis_min-5, color="red", label="zeus surface")
+    if should_add_prediction == "y":
+        plt.scatter(predict_deaths, predict_kills, color="green", label="prediction")
+        image_name = "images/img" + str(int_progressive) + "_prediction.png"
     if legend == 0:
         plt.legend()
         plt.xlabel("deaths")
         plt.ylabel("kills")
         legend = 1
-    plt.savefig("images/img" + str(int_progressive) + ".png")
-    print("images/img" + str(int_progressive) + ".png")
+    plt.savefig(image_name)
+    print(image_name)

@@ -39,6 +39,7 @@ def predict_func():
     classifier = GaussianNB()  # Creating a classifier of a gaussian naive bayes type
     classifier.fit(x_train, y_train)  # Try fit features, X, to labels, Y using training points to train classifier
     prediction_input = input("Prediction in form kills, deaths: ").split(", ")
+    to_be_graphed = input("Would you liked it graphed y/n: ").lower()
     kills = int(prediction_input[0])
     deaths = int(prediction_input[1])
 
@@ -48,14 +49,13 @@ def predict_func():
         xaxis_max = deaths
 
     prediction = classifier.predict([[kills, deaths]])  # Now attempting to predict a label for a new set of features
-    print(prediction)
     if prediction == 0:
-        print("s1mple")
+        print("\nPrediction: s1mple for " + str(kills) + " kills and " + str(deaths) + " deaths.\n")
     elif prediction == 1:
-        print("zeus")
+        print("\nPrediction: zeus for " + str(kills) + " kills and " + str(deaths) + " deaths.\n")
     else:
         print("Error")
-    correct_q = input("Was it right y/n: ")
+    correct_q = input("Was it right y/n: ").lower()
     if correct_q == "y":
         correct = prediction[0]
     elif correct_q == "n":
@@ -65,12 +65,17 @@ def predict_func():
             correct = 0
     else:
         correct = "Error"
-    print("Thanks! I'll use this for next time.")
-    q = open("data.txt", "a")
-    towrite = "\n" + str(kills) + " " + str(deaths) + " " + str(correct)
-    print(towrite)
-    q.write(towrite)
-    q.close()
+    to_save = input("Thanks! Do you want this saved for next time y/n: ").lower()
+    if to_save == "y":
+        q = open("data.txt", "a")
+        towrite = "\n" + str(kills) + " " + str(deaths) + " " + str(correct)
+        q.write(towrite)
+        q.close()
+        print("I'll use this for next time.")
+    num_lines = sum(1 for line in open("data.txt"))
+    if to_be_graphed == "y":
+        picture(classifier, x_list, y_list, num_lines, xaxis_min, xaxis_max, yaxis_min, yaxis_max, to_be_graphed, kills,
+                deaths)
 
 
 def graph_func():
@@ -108,10 +113,11 @@ def graph_func():
         num_lines = sum(1 for line in open("data.txt"))
         if number > 0:  # needs to be > 0 as otherwise there aren't any samples
             if only_at_end == "n":  # generating an image for each point
-                picture(classifier, x_list, y_list, number, xaxis_min, xaxis_max, yaxis_min, yaxis_max)
+                picture(classifier, x_list, y_list, number, xaxis_min, xaxis_max, yaxis_min, yaxis_max, "n", None, None)
             if only_at_end == "y":  # generating only the last image
                 if number == num_lines-1:
-                    picture(classifier, x_list, y_list, num_lines, xaxis_min, xaxis_max, yaxis_min, yaxis_max)
+                    picture(classifier, x_list, y_list, num_lines, xaxis_min, xaxis_max, yaxis_min, yaxis_max, "n",
+                            None, None)
                     break
         number += 1
     f.close()
