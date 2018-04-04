@@ -18,9 +18,9 @@ def predict_func():
     f = open("data.txt", 'r')
     for i in f.readlines():
         i_array = i.split(" ")
-        x_var1 = int(i_array[0].strip())
-        x_var2 = int(i_array[1])
-        y_var = int(i_array[2].strip())
+        x_var1 = int(i_array[0].strip())  # this is kills for player
+        x_var2 = int(i_array[1])          # this is deaths for player
+        y_var = int(i_array[2].strip())   # this is player#
         x_var = [x_var1, x_var2]
         x_list.append(x_var)
         y_list.append(y_var)
@@ -57,9 +57,9 @@ def predict_func():
         print("Error")
     correct_q = input("Was it right y/n: ").lower()
     if correct_q == "y":
-        correct = prediction[0]
+        correct = prediction[0]  # If the prediction is right set it to correct
     elif correct_q == "n":
-        if prediction[0] == 0:
+        if prediction[0] == 0:   # If not correct check which prediction was made and then set the right one
             correct = "1"
         else:
             correct = 0
