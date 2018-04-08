@@ -1,4 +1,4 @@
-## Machine Learning Naive-Bayes algorithm that learns between the KD of s1mple and Zeus (from the CSGO team Na'Vi).
+## Machine Learning Naive-Bayes algorithm that learns between the KD of any two CS:GO players.
 
 #### Prerequisites:
 - numpy
