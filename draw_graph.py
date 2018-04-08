@@ -8,7 +8,7 @@ legend = 0
 
 
 def picture(clf, x_test, y_test, int_progressive, xaxis_min, xaxis_max, yaxis_min, yaxis_max, should_add_prediction,
-            predict_kills, predict_deaths):
+            predict_kills, predict_deaths, player0, player1):
     global legend
 
     image_name = "images/img" + str(int_progressive) + ".png"
@@ -21,25 +21,25 @@ def picture(clf, x_test, y_test, int_progressive, xaxis_min, xaxis_max, yaxis_mi
     # point in the mesh [x_min, m_max]x[y_min, y_max].
     h = 1  # step size in the mesh
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-    Z = clf.predict(np.c_[yy.ravel(), xx.ravel()])
+    z = clf.predict(np.c_[yy.ravel(), xx.ravel()])
 
     # Put the result into a color plot
-    Z = Z.reshape(xx.shape)
+    z = z.reshape(xx.shape)
     plt.xlim(xx.min(), xx.max())
     plt.ylim(yy.min(), yy.max())
 
-    plt.pcolormesh(xx, yy, Z, cmap=pl.cm.seismic)
+    plt.pcolormesh(xx, yy, z, cmap=pl.cm.seismic)
 
     # Plot points
-    kills_s1mple = [x_test[ii][0] for ii in range(0, len(x_test)) if y_test[ii] == 0]
-    deaths_s1mple = [x_test[ii][1] for ii in range(0, len(x_test)) if y_test[ii] == 0]
-    kills_zeus = [x_test[ii][0] for ii in range(0, len(x_test)) if y_test[ii] == 1]
-    deaths_zeus = [x_test[ii][1] for ii in range(0, len(x_test)) if y_test[ii] == 1]
+    kills_player0 = [x_test[ii][0] for ii in range(0, len(x_test)) if y_test[ii] == 0]
+    deaths_player0 = [x_test[ii][1] for ii in range(0, len(x_test)) if y_test[ii] == 0]
+    kills_player1 = [x_test[ii][0] for ii in range(0, len(x_test)) if y_test[ii] == 1]
+    deaths_player1 = [x_test[ii][1] for ii in range(0, len(x_test)) if y_test[ii] == 1]
 
-    plt.scatter(deaths_s1mple, kills_s1mple, color="cyan", label="s1mple")
-    plt.scatter(deaths_zeus, kills_zeus, color="orange", label="zeus")
-    plt.scatter(xaxis_min-5, yaxis_min-5, color="blue", label="s1mple surface")
-    plt.scatter(xaxis_min-5, yaxis_min-5, color="red", label="zeus surface")
+    plt.scatter(deaths_player0, kills_player0, color="cyan", label=player0)
+    plt.scatter(deaths_player1, kills_player1, color="orange", label=player1)
+    plt.scatter(xaxis_min-5, yaxis_min-5, color="blue", label=player0 + " surface")
+    plt.scatter(xaxis_min-5, yaxis_min-5, color="red", label=player1 + " surface")
     if should_add_prediction == "y":
         plt.scatter(predict_deaths, predict_kills, color="green", label="prediction")
         image_name = "images/img" + str(int_progressive) + "_prediction.png"

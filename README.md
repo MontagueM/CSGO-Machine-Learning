@@ -12,8 +12,15 @@ An easy way to get all the prerequisites is to use Anaconda as your python inter
 
 #### Style for text.txt:
 
-kills deaths player
+First line = your first player (#0)
+Second line = your second player (#1)
 
-player #:
+player # as an example:
 0 = simple
 1 = zeus
+
+Below this the numbers are ordered like this:
+
+kills deaths player
+
+e.g. **23 12 0** means 23 kills, 12 deaths, and is the first player (s1mple).
