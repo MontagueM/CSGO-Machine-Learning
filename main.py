@@ -126,9 +126,9 @@ def graph_func():
             classifier = GaussianNB()  # Creating a classifier of a gaussian naive bayes type
             classifier.fit(x_train, y_train)  # Try fit features, X, to labels, Y using training points to train
             num_lines = sum(1 for line in open("data.txt"))
-            if (current_line - 2) > 0:  # needs to be > 0 as otherwise there aren't any samples
+            if (current_line - 1) > 0:  # needs to be > 0 as otherwise there aren't any samples
                 if only_at_end == "n":  # generating an image for each point
-                    picture(classifier, x_list, y_list, current_line-2, xaxis_min, xaxis_max, yaxis_min, yaxis_max, "n",
+                    picture(classifier, x_list, y_list, current_line-1, xaxis_min, xaxis_max, yaxis_min, yaxis_max, "n",
                             None, None, player0, player1)
                 if only_at_end == "y":  # generating only the last image
                     if current_line+2 == num_lines-1:
